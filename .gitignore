@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+.venv
+.poetry
+.cache/
+
+# Django
+db.sqlite3
+staticfiles/
+
+# Poetry
+poetry.toml
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
