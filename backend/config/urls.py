@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from config.api import api
+from apps.common.views import landing_page
 
 urlpatterns = [
-    path("", include("apps.dashboard.urls")),  # root will always check dashboard app's urls 
+    # path("", include("apps.dashboard.urls")),  # root will always check dashboard app's urls 
+    path("", landing_page, name = "landing_page"), 
+    path("dashboard/", include("apps.dashboard.urls")),
     path("admin/", admin.site.urls),
     path("api/", api.urls),
 ]

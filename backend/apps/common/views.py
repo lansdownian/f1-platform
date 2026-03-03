@@ -2,6 +2,6 @@ from django.shortcuts import render
 
 # Create your views here.
 
-# make these views @inertia() views 
-def dashboard_view():
+# this is the landing page view for our website 
+def landing_page():
     pass 
