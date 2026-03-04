@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from inertia import inertia
 
-# Create your views here.
 
-# this is the landing page view for our website 
-def landing_page():
-    pass 
+@inertia('app/common/LandingPage')
+def landing_page(request):
+    return {}
