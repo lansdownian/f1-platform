@@ -20,5 +20,10 @@ export default defineConfig([
         ecmaFeatures: { jsx: true },
       },
     },
+    rules: {
+      // PascalCase identifiers used as JSX tags are not detected as "used"
+      // by the base no-unused-vars rule without eslint-plugin-react.
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z]', args: 'after-used' }],
+    },
   },
 ])

@@ -1,8 +1,26 @@
+import { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import F1CarModel from '../../../components/F1CarModel';
+import { router } from '@inertiajs/react'
+
+
 export default function LandingPage() {
   return (
     <>
       <style>{`
-              * {
+        @font-face {
+          font-family: 'Formula1';
+          src: url('/fonts/F1FontBold.ttf') format('truetype');
+          font-weight: normal;
+        }
+
+        @font-face {
+          font-family: 'Formula1';
+          src: url('/fonts/F1FontWide.ttf') format('truetype');
+          font-weight: bold;
+        }
+        * {
           box-sizing: border-box;
         }
 
@@ -12,6 +30,7 @@ export default function LandingPage() {
           height: 100%;
           width: 100%;
         }
+
         @keyframes gradientShift {
           0%   { background-position: 0% 50%; }
           50%  { background-position: 100% 50%; }
@@ -26,19 +45,20 @@ export default function LandingPage() {
           letter-spacing: 0.05em;
           background: linear-gradient(
             135deg,
-            #064e3b,
-            #059669,
-            #34d399,
-            #6ee7b7,
-            #34d399,
-            #059669,
-            #064e3b
+rgb(115, 0, 0),
+rgb(204, 10, 10),
+rgb(240, 164, 164),
+rgb(255, 197, 197),
+rgb(255, 230, 230),
+rgb(255, 255, 255),
+rgb(242, 189, 139)
           );
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           animation: gradientShift 4s ease infinite;
-          margin-bottom: 70px;
+          margin: 0 0 24px 0;
+          padding-top: 48px;
         }
 
         .rhombus-btn {
@@ -86,24 +106,68 @@ export default function LandingPage() {
         .rhombus-btn:active {
           transform: skewX(-25deg) translateY(1px) scale(0.98);
         }
+
+        .hero-section {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          width: 100vw;
+          height: 100vh;
+
+          background: #000;
+          overflow: hidden;
+        }
+
+        .canvas-container {
+          width: 100%;
+          flex: 1;
+          min-height: 0;
+        }
+
+        .hero-footer {
+          padding: 32px 0 48px;
+          display: flex;
+          justify-content: center;
+        }
       `}</style>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-          background: "#0a0a0a",
-        }}
-      >
+      <div className="hero-section">
         <h1 className="landing-heading">
           Welcome to F1 Platform by Lansdownian
         </h1>
 
-        <div className="rhombus-btn">
-          <span>Let's Go</span>
+        <div className="canvas-container">
+          <Canvas
+            camera={{ position: [0, 2.5, 6], fov: 45 }}
+            style={{ width: '100%', height: '100%', background: 'transparent' }}
+          >
+            <ambientLight intensity={0.6} />
+            <directionalLight position={[5, 5, 5]} intensity={1.2} />
+
+            <Suspense fallback={null}>
+              <F1CarModel />
+            </Suspense>
+
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              minPolarAngle={Math.PI / 3}
+              maxPolarAngle={(Math.PI / 2) + 0.2}
+            />
+          </Canvas>
+        </div>
+
+        <div className="hero-footer">
+          <div className="rhombus-btn"
+          onClick={() => {
+            console.log("Navigating to dashboard...");
+            router.visit('/dashboard/');
+          }}
+          >
+            <span>Let's Go</span>
+          </div>
         </div>
       </div>
     </>

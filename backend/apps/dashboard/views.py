@@ -1,7 +1,6 @@
-from django.shortcuts import render
+# views.py
 
-# Create your views here.
+from inertia import render
 
-# make these views @inertia() views 
-def dashboard_view():
-    pass 
+def dashboard(request):
+    return render(request, "app/dashboard/Dashboard")

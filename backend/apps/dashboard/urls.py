@@ -1,9 +1,8 @@
+# urls.py
+
 from django.urls import path
-from django.http import HttpResponse
-from .views import dashboard_view
-
-
+from .views import dashboard
 
 urlpatterns = [
-    path("/", dashboard_view, name = 'dashboard'),
+    path('', dashboard, name='dashboard'),
 ]
