@@ -5,12 +5,23 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Full-viewport background so no “empty strip” beside #root */
+  background-color: #0a0a0c;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  width: 100%;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
 }
 
 a {
@@ -24,10 +35,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  width: 100%;
+  /* Vite’s default used flex + place-items:center, which shrink-wraps #root
+     and leaves unused horizontal space (often ~half the viewport on wide screens). */
 }
 
 h1 {

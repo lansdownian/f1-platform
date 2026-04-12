@@ -142,6 +142,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Repo-root static/ (monorepo); not backend/static/
+# static is in root, but base-dir is backend/, so used .parent to reach static/
 STATICFILES_DIRS = [
     BASE_DIR.parent / "static",
 ]
